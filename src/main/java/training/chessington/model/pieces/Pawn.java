@@ -24,14 +24,15 @@ public class Pawn extends AbstractPiece {
         Move ft2 = new Move(from,to);
         result.add(ft2);
 
-        to = from.plus(2,0);
-        Move ft3 = new Move(from,to);
-        result.add(ft3);
+        if(colour == PlayerColour.BLACK && from.getRow()==1) {
+            to = from.plus(2, 0);
+            Move ft3 = new Move(from, to);
+            result.add(ft3);
+        }
 
         to = from.plus(-2,0);
         Move ft4 = new Move(from,to);
         result.add(ft4);
-
 
         return result;
     }
