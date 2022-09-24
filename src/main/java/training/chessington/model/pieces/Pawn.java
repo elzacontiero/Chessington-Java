@@ -30,9 +30,11 @@ public class Pawn extends AbstractPiece {
             result.add(ft3);
         }
 
-        to = from.plus(-2,0);
-        Move ft4 = new Move(from,to);
-        result.add(ft4);
+        if(colour==PlayerColour.WHITE && from.getRow()==6) {
+            to = from.plus(-2, 0);
+            Move ft4 = new Move(from, to);
+            result.add(ft4);
+        }
 
         return result;
     }
