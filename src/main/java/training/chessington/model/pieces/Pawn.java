@@ -37,7 +37,6 @@ public class Pawn extends AbstractPiece {
             }
         }
 
-
         if(colour == PlayerColour.BLACK && from.getRow()==1) {
             to = from.plus(2, 0);
             Move ft3 = new Move(from, to);
@@ -48,6 +47,37 @@ public class Pawn extends AbstractPiece {
             to = from.plus(-2, 0);
             Move ft4 = new Move(from, to);
             result.add(ft4);
+        }
+
+        // whitePawnsCanCaptureDiagonally
+        if (colour==PlayerColour.WHITE) {
+            to = from.plus(-1,1);
+            Piece enemy = board.get(to);
+            if (enemy != null && enemy.getColour() == PlayerColour.BLACK) {
+                Move move = new Move(from, to);
+                result.add(move);
+            }
+            to = from.plus(-1,-1);
+            enemy = board.get(to);
+            if (enemy != null && enemy.getColour() == PlayerColour.BLACK) {
+                Move move = new Move(from, to);
+                result.add(move);
+            }
+        }
+        // blackPawnsCanCaptureDiagonally
+        if (colour==PlayerColour.BLACK) {
+            to = from.plus(1,1);
+            Piece enemy = board.get(to);
+            if (enemy != null && enemy.getColour() == PlayerColour.WHITE) {
+                Move move = new Move(from, to);
+                result.add(move);
+            }
+            to = from.plus(1,-1);
+            enemy = board.get(to);
+            if (enemy != null && enemy.getColour() == PlayerColour.WHITE) {
+                Move move = new Move(from, to);
+                result.add(move);
+            }
         }
 
         return result;
