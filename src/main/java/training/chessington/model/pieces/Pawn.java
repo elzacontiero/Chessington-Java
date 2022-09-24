@@ -20,11 +20,12 @@ public class Pawn extends AbstractPiece {
         Move ft = new Move(from,to);
         result.add(ft);
 
+        to = from.plus(1,0);
+        Move ft2 = new Move(from,to);
+        result.add(ft2);
+
 
         return result;
     }
-
-
-
 
 }
