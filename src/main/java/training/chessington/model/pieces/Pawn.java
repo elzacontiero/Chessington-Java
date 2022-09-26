@@ -53,50 +53,59 @@ public class Pawn extends AbstractPiece {
         }
         return result;
     }
-    @Override
-    public List<Move> getAllowedMoves(Coordinates from, Board board) {
+
+    private List<Move> getAllowedMovesForWhite(Coordinates from, Board board) {
         List<Move> result = new ArrayList<>();
-        Piece pieceInFront;
-        // White moves up
         Coordinates to = from.plus(-1, 0);
         if (to.getRow()>=0 && to.getRow()<=7) {
-            pieceInFront = board.get(to);
-            if (colour == PlayerColour.WHITE && pieceInFront == null) {
+            Piece pieceInFront = board.get(to);
+            if (pieceInFront == null) {
                 Move ft = new Move(from, to);
                 result.add(ft);
             }
         }
 
-        if(colour==PlayerColour.WHITE && from.getRow()==6) {
+        if(from.getRow()==6) {
             to = from.plus(-2, 0);
             Move ft4 = new Move(from, to);
             result.add(ft4);
         }
 
-        // whitePawnsCanCaptureDiagonally
-        if (colour==PlayerColour.WHITE) {
-            to = from.plus(-1, 1);
-            if(to.getRow()>=0 && to.getCol()<=7) {
-                Piece enemy = board.get(to);
-                if (enemy != null && enemy.getColour() == PlayerColour.BLACK) {
-                    Move move = new Move(from, to);
-                    result.add(move);
-                }
-            }
-            to = from.plus(-1,-1);
-            if(to.getRow()>=0 && to.getCol()>=0) {
-                Piece enemy = board.get(to);
-                if (enemy != null && enemy.getColour() == PlayerColour.BLACK) {
-                    Move move = new Move(from, to);
-                    result.add(move);
-                }
+        to = from.plus(-1, 1);
+        if(to.getRow()>=0 && to.getCol()<=7) {
+            Piece enemy = board.get(to);
+            if (enemy != null && enemy.getColour() == PlayerColour.BLACK) {
+                Move move = new Move(from, to);
+                result.add(move);
             }
         }
+        to = from.plus(-1,-1);
+        if(to.getRow()>=0 && to.getCol()>=0) {
+            Piece enemy = board.get(to);
+            if (enemy != null && enemy.getColour() == PlayerColour.BLACK) {
+                Move move = new Move(from, to);
+                result.add(move);
+            }
+        }
+        return result;
+    }
+
+    @Override
+    public List<Move> getAllowedMoves(Coordinates from, Board board) {
+        List<Move> result = new ArrayList<>();
+        Piece pieceInFront;
+
 
         if (colour==PlayerColour.BLACK) {
             List<Move> blackMovements = getAllowedMovesForBlack(from, board);
             result.addAll(blackMovements);
         }
+
+        if(colour==PlayerColour.WHITE){
+            List<Move> whiteMovements = getAllowedMovesForWhite(from, board);
+            result.addAll(whiteMovements);
+        }
+
         return result;
       }
 }
