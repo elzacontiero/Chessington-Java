@@ -20,39 +20,7 @@ Go through the tests and fix the ones that are failing by implementing the missi
 2. Identify the functionality (usually a _method_ that is failing) under test.
 3. Go to that method and write code with the missing functionality.
 
-## Code organisation
 
-The code is organised in the following way:
-
-
-In package `training.chessington.model.pieces`:
-
-- `public final class Move`
-  - Represents a movement for a piece.
-  - This class has two properties:
-    - Coordinates from;
-    - Coordinates to;
-    - The idea is to create a move by providing these 2 coordinates.
-- `public final class Coordinates`
-  - (Row,Column) coordinates on the board. The origin of the board (0,0) is at the top left. 
-- `interface Piece`
-  - Every piece in the game implements this interface. The interface has `enum PieceType`.
-- `abstract class AbstractPiece`
-  - Abstract class that implements `Piece` interface.
-  - It is extended by classes `Bishop`,`King`,`Knight`,`Pawn`,`Queen`,`Rook`
-- `Board`
-  - Class that represents a board. 
-- `final class Coordinates`
-  - Represents a position in the board. 
-  - Constructor `Coordinates(int row, int column)`
-  - method `public Coordinates plus(int rowDiff, int colDiff)`
-    - Returns a new Coordinates object adding `rowDiff` to this row and `colDiff` to this column.
-    - Note that `rowDiff` and `colDiff` can be negative, decreasing row or column respectively.
-- `class Game`
-- `public final class Move`
-  - Represents a movement in the board from one `Coordinates` to another. 
-- `enum PlayerColour`
-  - `WHITE` or `BLACK`
 
 ## Task implement `getAllowedMoves`
 
